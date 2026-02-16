@@ -18,22 +18,19 @@ elementoPadre.addEventListener("click", (e) => {
 async function getEmpleado() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
-        
-        // Buena práctica: verificar que la respuesta HTTP sea exitosa (código 200-299)
-        if (!response.ok) throw new Error('Network peso was not ok'); 
-        
         const data = await response.json();
         
-        // Creamos los elementos DENTRO de la función si queremos perfiles múltiples
         const nombreUsuario = document.createElement('h1');
         const correoUsuario = document.createElement('p');
         const companyName = document.createElement('p');
 
-        // Usamos textContent por seguridad
         nombreUsuario.textContent = `Nombre: ${data.name}`;
         correoUsuario.textContent = `Correo: ${data.email}`;
         companyName.textContent = `Empresa: ${data.company.name}`;
+     
+        elementoPadre.innerHTML = ''; 
         
+        // Agregamos los elementos limpios
         elementoPadre.append(nombreUsuario, correoUsuario, companyName); 
         console.log(data);
     } catch (error) {
